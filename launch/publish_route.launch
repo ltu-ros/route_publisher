@@ -1,0 +1,14 @@
+<launch>
+    <arg name="route" default="route1" />
+
+    <node name="route_publisher"
+          pkg="route_publisher"
+          type="route_publisher_node.py" 
+          output="screen" >
+
+        <param name="route_filename" value="$(find route_publisher)/data/$(arg route).json" />
+    </node>
+
+    <node name="route_viz" pkg="route_publisher" type="route_viz_node.py" output="screen" />
+
+</launch>

@@ -1,0 +1,19 @@
+{
+    "commands": [
+        {
+            "command": "goto",
+            "x": 38,
+            "y": -19
+        },
+        {
+            "command": "goto",
+            "x": -4,
+            "y": 36
+        },
+        {
+            "command": "goto",
+            "x": -45,
+            "y": -15
+        }
+    ]
+}
