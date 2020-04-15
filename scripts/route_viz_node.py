@@ -4,12 +4,14 @@ import rospy
 from route_publisher.msg import Route
 from visualization_msgs.msg import Marker, MarkerArray
 
-command_colors = {
-    'goto': (1, 1, 0),
-    'wait': (1, 0.2, 0),
-}
+def colorhash(x):
+    h = hash(str(x))
+    return ((h%155+100)/255.0,
+            ((h//100)%155+100)/255.0,
+            ((h//10000)%155+100)/255.0)
 
 def makeMarker(x, y, id, color, z=0):
+    scale = 0.3
     m = Marker()
     m.id = id
     m.header.frame_id = 'map'
@@ -19,9 +21,9 @@ def makeMarker(x, y, id, color, z=0):
     m.pose.position.x = x
     m.pose.position.y = y
     m.pose.position.z = z
-    m.scale.x = 1.0
-    m.scale.y = 1.0
-    m.scale.z = 1.0
+    m.scale.x = scale
+    m.scale.y = scale
+    m.scale.z = scale
     m.pose.orientation.w = 1.0
     return m
 
@@ -49,31 +51,24 @@ def routeCallback(route):
     last_x = 0
     last_y = 0
     for command in route.commands:
-        color = command_colors[command.command]
-        if command.command == 'goto':
-            last_x = command.x
-            last_y = command.y
+        color = colorhash(command.command)
 
-            # Point
-            markers.append(makeMarker(last_x, last_y, count, color))
-            count += 1
+        # Get X/Y
+        x, y = command.x, command.y
+        if command.command in ('wait', 'search'):
+            x, y = last_x, last_y
 
-            # Label
-            markers.append(makeLabel(last_x, last_y, count, 'goto'))
-            count += 1
+        # Point
+        markers.append(makeMarker(x, y, count, color))
+        count += 1
 
-        elif command.command == 'wait':
-            # Point
-            markers.append(makeMarker(last_x, last_y, count, color, z=2))
-            count += 1
+        # Label
+        markers.append(makeLabel(x, y, count, command.name))
+        count += 1
 
-            # Label
-            markers.append(makeLabel(last_x,
-                                     last_y,
-                                     count,
-                                     'wait {}s'.format(command.seconds),
-                                     z=2))
-            count += 1
+        last_x = x
+        last_y = y
+
 
     global publisher
     publisher.publish(MarkerArray(markers=markers))
