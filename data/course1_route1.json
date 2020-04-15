@@ -1,0 +1,31 @@
+{
+    "commands": [
+        {
+            "command": "goto",
+            "name": "Waypoint A",
+            "x": 5.02,
+            "y": -1.377
+        },
+        {
+            "command": "line_follow",
+            "name": "Waypoint B",
+            "x": 2.92,
+            "y": -8.08
+        },
+        {
+            "command": "goto",
+            "name": "Waypoint C",
+            "x": -6.337,
+            "y": -3.7
+        },
+        {
+            "command": "line_follow",
+            "name": "Waypoint D",
+            "x": -5.02,
+            "y": 2.48
+        },
+        {
+            "command": "search"
+        }
+    ]
+}

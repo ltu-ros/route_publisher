@@ -162,6 +162,7 @@ include_directories(
 install(PROGRAMS
     scripts/route_publisher_node.py
     scripts/route_viz_node.py
+    scripts/goto.py
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
