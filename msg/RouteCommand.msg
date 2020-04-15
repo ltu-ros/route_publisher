@@ -5,6 +5,9 @@
 
 string command
 
+# The name of the waypoint this command will execute until
+string name
+
 # The following values are set if needed for the given command
 # and are left in default state otherwise
 
