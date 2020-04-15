@@ -12,10 +12,15 @@ class GotoNode:
     def __init__(self):
         rospy.init_node('goto_node', anonymous=True)
 
-        self.twist_pub = rospy.Publisher('/prizm/twist_controller/twist_cmd', Twist, queue_size=10)
-        self.marker_pub = rospy.Publisher('/goto_node/goal', Marker, queue_size=10, latch=True)
-        self.odom_sub = rospy.Subscriber('/car/odom', Odometry, self.odomCallback)
-        self.goal_sub = rospy.Subscriber('/clicked_point', PointStamped, self.clickedPointCallback)
+        twist_topic = rospy.get_param('~twist_topic', '/prizm/twist_controller/twist_cmd')
+        goal_topic  = rospy.get_param('~goal_topic',  '/goto_node/goal')
+        odom_topic  = rospy.get_param('~odom_topic',  '/car/odom')
+
+
+        self.twist_pub  = rospy.Publisher(twist_topic, Twist, queue_size=10)
+        self.marker_pub = rospy.Publisher(goal_topic, Marker, queue_size=10, latch=True)
+        self.odom_sub   = rospy.Subscriber(odom_topic, Odometry, self.odomCallback)
+        self.goal_sub   = rospy.Subscriber('/clicked_point', PointStamped, self.clickedPointCallback)
 
         self.goal = None
 
