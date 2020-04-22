@@ -1,0 +1,43 @@
+{
+    "commands": [
+        {
+            "command": "goto",
+            "name": "Waypoint A",
+            "x": 4.983,
+            "y": 2.2254
+        },
+        {
+            "command": "line_follow",
+            "name": "Waypoint B",
+            "x": 5.1102,
+            "y": -0.848
+        },
+        {
+            "command": "goto",
+            "name": "Waypoint C",
+            "x": 4.34,
+            "y": -4.988
+        },
+        {
+            "command": "line_follow",
+            "name": "Waypoint D",
+            "x": -1.60,
+            "y": -4.01
+        },
+        {
+            "command": "goto",
+            "name": "Waypoint E",
+            "x": -0.577,
+            "y": 0.728
+        },
+        {
+            "command": "line_follow",
+            "name": "Waypoint F",
+            "x": -1.358,
+            "y": 3.785
+        },
+        {
+            "command": "search"
+        }
+    ]
+}
