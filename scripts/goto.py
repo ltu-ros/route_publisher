@@ -18,9 +18,10 @@ class GotoNode:
 
 
         self.twist_pub  = rospy.Publisher(twist_topic, Twist, queue_size=10)
-        self.marker_pub = rospy.Publisher(goal_topic, Marker, queue_size=10, latch=True)
+        self.marker_pub = rospy.Publisher('/goto_node/marker', Marker, queue_size=10, latch=True)
         self.odom_sub   = rospy.Subscriber(odom_topic, Odometry, self.odomCallback)
-        self.goal_sub   = rospy.Subscriber('/clicked_point', PointStamped, self.clickedPointCallback)
+        self.cp_sub     = rospy.Subscriber('/clicked_point', PointStamped, self.clickedPointCallback)
+        self.goal_sub   = rospy.Subscriber(goal_topic, Point, self.goalCallback)
 
         self.goal = None
 
